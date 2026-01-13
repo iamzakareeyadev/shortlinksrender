@@ -19,5 +19,8 @@ php artisan route:clear
 echo "==> Running migrations..."
 php artisan migrate --force || echo "Migration failed, continuing..."
 
+echo "==> Seeding database..."
+php artisan db:seed --force || echo "Seeding skipped (already seeded)"
+
 echo "==> Starting server on port 10000..."
 exec php artisan serve --host=0.0.0.0 --port=10000
