@@ -2,9 +2,8 @@ services:
   # Web Service
   - type: web
     name: jnd-shortlinks
-    runtime: php
-    buildCommand: chmod +x render-build.sh && ./render-build.sh
-    startCommand: php artisan serve --host=0.0.0.0 --port=$PORT
+    runtime: docker
+    plan: free
     envVars:
       - key: APP_KEY
         generateValue: true
@@ -12,6 +11,8 @@ services:
         value: production
       - key: APP_DEBUG
         value: false
+      - key: APP_URL
+        value: https://jnd-shortlinks.onrender.com
       - key: LOG_CHANNEL
         value: stderr
       - key: SESSION_DRIVER
@@ -23,7 +24,7 @@ services:
           name: jnd-shortlinks-db
           property: connectionString
 
-  # PostgreSQL Database
+# PostgreSQL Database
 databases:
   - name: jnd-shortlinks-db
     plan: free
