@@ -1,59 +1,175 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# JND ShortLinks - URL Shortener
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+ระบบย่อ URL แบบเรียบง่าย พัฒนาด้วย Laravel Framework คล้ายกับ Bitly
 
-## About Laravel
+🌐 **Live Demo**: [https://jnd-shortlinks.onrender.com](https://jnd-shortlinks.onrender.com)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ✨ Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 1. User Account Module
+- สมัครสมาชิก / เข้าสู่ระบบด้วย Email + Password
+- ระบบ Remember me
+- Password hashing (bcrypt)
 
-## Learning Laravel
+### 2. URL Shortener Module
+- สร้าง Short URL อัตโนมัติ (6 ตัวอักษร)
+- กำหนด Custom short code ได้ (4-10 ตัวอักษร)
+- ตั้งวันหมดอายุ URL
+- ติดตามสถิติการคลิก (จำนวน, อุปกรณ์, เบราว์เซอร์)
+- เปิด/ปิด URL ได้
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 3. Admin Module
+- Dashboard แสดงสถิติภาพรวม
+- จัดการ URLs ทั้งหมด (ค้นหา, กรอง, เปิด/ปิด, ลบ)
+- จัดการผู้ใช้ (ให้/ลดสิทธิ์ Admin, ลบ)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🛠 Tech Stack
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+| Layer | Technology |
+|-------|------------|
+| Backend | PHP 8.2, Laravel 11 |
+| Frontend | Blade Template, Bootstrap 5 |
+| Database | MySQL (Local) / PostgreSQL (Production) |
+| Caching | File Cache (รองรับ Redis) |
+| Deployment | Docker, Render.com |
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 📦 Installation (Local Development)
 
-## Contributing
+### 1. Clone โปรเจค
+```bash
+git clone https://github.com/YOUR_USERNAME/jnd-shortlinks.git
+cd jnd-shortlinks
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 2. ติดตั้ง Dependencies
+```bash
+composer install
+```
 
-## Code of Conduct
+### 3. ตั้งค่า Environment
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 4. แก้ไข `.env` สำหรับ Database
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=jnd_shortlinks
+DB_USERNAME=root
+DB_PASSWORD=your_password
+```
 
-## Security Vulnerabilities
+### 5. สร้าง Database และ Migrate
+```bash
+# สร้าง database ใน MySQL ก่อน
+mysql -u root -p -e "CREATE DATABASE jnd_shortlinks"
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# รัน migrations และ seed
+php artisan migrate --seed
+```
 
-## License
+### 6. รัน Development Server
+```bash
+php artisan serve
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+เปิด http://localhost:8000
+
+---
+
+## 👤 บัญชีทดสอบ
+
+| Role | Email | Password |
+|------|-------|----------|
+| Admin | admin@example.com | password |
+| User | test@example.com | password |
+
+---
+
+
+## 📁 Project Structure
+
+```
+jnd-shortlinks/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── Auth/AuthController.php    # Login/Register
+│   │   │   ├── UrlController.php          # URL CRUD
+│   │   │   └── AdminController.php        # Admin functions
+│   │   └── Middleware/
+│   │       └── AdminMiddleware.php        # Admin guard
+│   └── Models/
+│       ├── User.php
+│       ├── Url.php
+│       └── UrlClick.php
+├── database/
+│   ├── migrations/                        # Database schema
+│   └── seeders/DatabaseSeeder.php         # Default users
+├── resources/views/
+│   ├── layouts/app.blade.php              # Main layout
+│   ├── auth/                              # Login/Register pages
+│   ├── urls/                              # URL management pages
+│   └── admin/                             # Admin pages
+├── routes/web.php                         # All routes
+├── Dockerfile                             # Docker config
+├── render.yaml                            # Render deployment
+└── docs/SYSTEM_ARCHITECTURE.md            # Architecture doc
+```
+
+---
+
+## ⚡ Performance Optimizations
+
+| Technique | Description |
+|-----------|-------------|
+| **Caching** | Cache URL lookups สำหรับ redirect (1 ชั่วโมง) |
+| **Database Index** | Index บน `short_code`, `user_id`, `is_active` |
+| **Atomic Operations** | ใช้ `increment()` สำหรับนับ clicks |
+| **Separated Analytics** | แยกตาราง `url_clicks` ไม่กระทบ redirect performance |
+
+---
+
+## 🔒 Security
+
+- ✅ Password Hashing (bcrypt)
+- ✅ CSRF Protection
+- ✅ XSS Prevention (Blade escaping)
+- ✅ SQL Injection Prevention (Eloquent ORM)
+- ✅ Authorization middleware (Admin/User)
+- ✅ HTTPS forced in production
+
+---
+
+## 📝 API Routes
+
+| Method | URI | Description |
+|--------|-----|-------------|
+| GET | `/` | Home page |
+| GET | `/login` | Login page |
+| POST | `/login` | Process login |
+| GET | `/register` | Register page |
+| POST | `/register` | Process registration |
+| POST | `/logout` | Logout |
+| GET | `/dashboard` | User dashboard |
+| GET | `/urls/create` | Create URL form |
+| POST | `/urls` | Store new URL |
+| GET | `/urls/{url}` | URL details & stats |
+| GET | `/urls/{url}/edit` | Edit URL form |
+| PUT | `/urls/{url}` | Update URL |
+| DELETE | `/urls/{url}` | Delete URL |
+| GET | `/{shortCode}` | Redirect to original URL |
+| GET | `/admin` | Admin dashboard |
+| GET | `/admin/urls` | Manage all URLs |
+| GET | `/admin/users` | Manage users |
+
+---
